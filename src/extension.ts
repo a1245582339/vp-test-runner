@@ -3,8 +3,10 @@
 import { ExtensionContext, languages, commands, Disposable, window, Task, TaskScope, ShellExecution, tasks, Uri } from 'vscode';
 import { CodelensProvider } from './utils/codeLensProvider';
 import { getCwd } from './utils/config';
-import { getSingleCaseJSON } from './utils/getSingleCaseJSON';
+import { getSingleCaseObj } from './utils/getSingleCaseObj';
 import fs = require("fs")
+import { getSingleMetaJSON } from './utils/getSingleMetaJSON';
+import path = require('path');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -24,7 +26,7 @@ const getRunSpecTask = (command: string) => {
 
 export function activate(context: ExtensionContext) {
 	const codelensProvider = new CodelensProvider();
-
+	const notificationPs1 = path.join(context.extensionPath, 'src/utils', 'notification.ps1');
 	languages.registerCodeLensProvider("json", codelensProvider);
 
 	/* Run spec */
@@ -32,7 +34,7 @@ export function activate(context: ExtensionContext) {
 		window.showInformationMessage(`VP local start ${args[0]}`);
 		const workspacePath = getCwd()
 		const filePath = args[0].split("\\visualparity-tests\\")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}'`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1}`
 		tasks.executeTask(getRunSpecTask(npmCommand))
 	});
 
@@ -43,7 +45,7 @@ export function activate(context: ExtensionContext) {
 		window.showInformationMessage(`VP online ${spalink} start ${args[0]}`);
 		const workspacePath = getCwd()
 		const filePath = args[0].split("\\visualparity-tests\\")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' --spalink ${spalink}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' --spalink ${spalink};${notificationPs1}`
 		tasks.executeTask(getRunSpecTask(npmCommand));
 	});
 
@@ -59,15 +61,22 @@ export function activate(context: ExtensionContext) {
 
 
 	/* Run case */
-	commands.registerCommand("vp.run-case-local", (args: [string, number]) => {
+	commands.registerCommand("vp.run-case-local", async (args: [string, number]) => {
 		window.showInformationMessage(`VP local start ${args[0]}`);
 		const workspacePath = getCwd()
-		const singleCase = getSingleCaseJSON(args[0], args[1])
+		const singleCase = getSingleCaseObj(args[0], args[1])
 		const pathArr = args[0].split('\\')
-		const tempFilePath = `${pathArr.slice(0, pathArr.length - 2).join('/')}/_temp_.spec.json`
-		fs.writeFileSync(tempFilePath, singleCase)
+		const tempFilePath = `${pathArr.slice(0, pathArr.length - 1).join('/')}/_temp_${pathArr[pathArr.length - 1]}`
+		fs.writeFileSync(tempFilePath, JSON.stringify(singleCase))
+
+		const originMetaFilePath = `${pathArr.slice(0, pathArr.length - 1).join('/')}/${pathArr[pathArr.length - 1].replace(".spec.json", ".metadata.json")}`.replace(/\\/g, "/")
+		const newMetaFilePath = `${pathArr.slice(0, pathArr.length - 1).join('/')}/_temp_${pathArr[pathArr.length - 1]}`.replace(".spec.json", ".metadata.json")
+		if (fs.existsSync(originMetaFilePath)) {
+			fs.writeFileSync(newMetaFilePath, getSingleMetaJSON(originMetaFilePath, singleCase.tests[0].testCase))
+		}
+		
 		const filePath = tempFilePath.split("/visualparity-tests/")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};git update-index --assume-unchanged ${tempFilePath};npm run test:vp -- -- --local --input '${filePath}'`
+		const npmCommand = `cd ${workspacePath};git update-index --assume-unchanged ./app-types/visualparity-tests/${filePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1}`
 		tasks.executeTask(getRunSpecTask(npmCommand))
 	});
 
@@ -76,14 +85,21 @@ export function activate(context: ExtensionContext) {
 			prompt: 'Build Number',
 			placeHolder: 'Build Number'
 		})
-		window.showInformationMessage(`VP online start ${args[0]}`);
+		window.showInformationMessage(`VP local start ${args[0]}`);
 		const workspacePath = getCwd()
-		const singleCase = getSingleCaseJSON(args[0], args[1])
+		const singleCase = getSingleCaseObj(args[0], args[1])
 		const pathArr = args[0].split('\\')
-		const tempFilePath = `${pathArr.slice(0, pathArr.length - 2).join('/')}/_temp_.spec.json`
-		fs.writeFileSync(tempFilePath, singleCase)
+		const tempFilePath = `${pathArr.slice(0, pathArr.length - 1).join('/')}/_temp_${pathArr[pathArr.length - 1]}`
+		fs.writeFileSync(tempFilePath, JSON.stringify(singleCase))
+
+		const originMetaFilePath = `${pathArr.slice(0, pathArr.length - 1).join('/')}/${pathArr[pathArr.length - 1].replace(".spec.json", ".metadata.json")}`.replace(/\\/g, "/")
+		const newMetaFilePath = `${pathArr.slice(0, pathArr.length - 1).join('/')}/_temp_${pathArr[pathArr.length - 1]}`.replace(".spec.json", ".metadata.json")
+		if (fs.existsSync(originMetaFilePath)) {
+			fs.writeFileSync(newMetaFilePath, getSingleMetaJSON(originMetaFilePath, singleCase.tests[0].testCase))
+		}
+		
 		const filePath = tempFilePath.split("/visualparity-tests/")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' --spalink ${spalink}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' --spalink ${spalink};${notificationPs1}`
 		tasks.executeTask(getRunSpecTask(npmCommand));
 	});
 	/* Run case end */
@@ -94,7 +110,7 @@ export function activate(context: ExtensionContext) {
 		window.showInformationMessage(`VP local start ${args.path.slice(1)}`);
 		const workspacePath = getCwd()
 		const filePath = args.path.split("/visualparity-tests/")[1]
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}'`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1}`
 		tasks.executeTask(getRunSpecTask(npmCommand))
 	});
 
@@ -105,7 +121,7 @@ export function activate(context: ExtensionContext) {
 		window.showInformationMessage(`VP online ${spalink} start ${args.path.slice(1)}`);
 		const workspacePath = getCwd()
 		const filePath = args.path.split("/visualparity-tests/")[1]
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' ${spalink ? `--spalink ${spalink}` : ""}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' ${spalink ? `--spalink ${spalink}` : ""};${notificationPs1}`
 		tasks.executeTask(getRunSpecTask(npmCommand));
 	});
 	/* Run folder and file end */

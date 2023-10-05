@@ -1,0 +1,168 @@
+{
+    "version": 2,
+    "suite": {
+        "[app:ugc] Test Case 5088809 5217291:[MSPH][Feed Management]Feed List-Suspend/Resume [lp:inner] [ph:NF\\Content Ecosystem\\CreatorCenter] [ow:stcaccuxdri] <chrome>": {
+            "vp_step_0": {
+                "type": "visual",
+                "step": 0,
+                "hash": "5fc76485240cdec44e6ad18307a625f3"
+            },
+            "vp_step_2": {
+                "type": "visual",
+                "step": 2,
+                "hash": "60c4118fda0bfef450600a6caf42e16c"
+            },
+            "vp_step_4": {
+                "type": "visual",
+                "step": 4,
+                "hash": "cf086d3a0e081d7fcae8a1610c08b887"
+            },
+            "vp_step_6": {
+                "type": "visual",
+                "step": 6,
+                "hash": "f7f7dff9514c426b2257ca3860380ca6"
+            },
+            "vp_step_8": {
+                "type": "visual",
+                "step": 8,
+                "hash": "2a9b6d4dff86adda7e38d1687f7d4f5a"
+            },
+            "vp_step_10": {
+                "type": "visual",
+                "step": 10,
+                "hash": "66a7f77f7f6b044b06b312aa59998d30"
+            },
+            "vp_step_12": {
+                "type": "visual",
+                "step": 12,
+                "hash": "c4e3328e5bf61a29039613cb06eef8c3"
+            },
+            "vp_step_14": {
+                "type": "visual",
+                "step": 14,
+                "hash": "b25b4586dfe72903f39c070ef4d1adac"
+            },
+            "vp_step_16": {
+                "type": "visual",
+                "step": 16,
+                "hash": "26d777572b2ddf63c8527f3ada16ca10"
+            },
+            "vp_step_18": {
+                "type": "visual",
+                "step": 18,
+                "hash": "b4f3f58b0783cddf100ad88caed058b1"
+            },
+            "vp_step_20": {
+                "type": "visual",
+                "step": 20,
+                "hash": "414b8726f3f2babf43c2731332c358f9"
+            },
+            "vp_step_22": {
+                "type": "visual",
+                "step": 22,
+                "hash": "3e0c621a742ee3f47bd880151009b97b"
+            },
+            "vp_step_24": {
+                "type": "visual",
+                "step": 24,
+                "hash": "c1f87e7efc9750487365e50648d31095"
+            },
+            "vp_step_26": {
+                "type": "visual",
+                "step": 26,
+                "hash": "997642fc7171107c3c54c702d371c686"
+            },
+            "vp_step_28": {
+                "type": "visual",
+                "step": 28,
+                "hash": "1e72e6f538ddb3080a46228a49cd45b5"
+            },
+            "vp_step_32": {
+                "type": "visual",
+                "step": 32,
+                "hash": "bd47280567cc94f4a2df1a9f530e12fd"
+            },
+            "vp_step_36": {
+                "type": "visual",
+                "step": 36,
+                "hash": "bd47280567cc94f4a2df1a9f530e12fd"
+            }
+        },
+        "[app:ugc] Test Case 5088809: [MSPH][Feed Management] Feed List-Pagination [lp:inner] [ph:NF\\Content Ecosystem\\CreatorCenter] [ow:stcaccuxdri] <chrome>": {
+            "vp_step_0": {
+                "type": "visual",
+                "step": 0,
+                "hash": "5fc76485240cdec44e6ad18307a625f3"
+            },
+            "vp_step_2": {
+                "type": "visual",
+                "step": 2,
+                "hash": "783e6c13643239a49a80608d8f205631"
+            },
+            "vp_step_5": {
+                "type": "visual",
+                "step": 5,
+                "hash": "5fc76485240cdec44e6ad18307a625f3"
+            },
+            "vp_step_7": {
+                "type": "visual",
+                "step": 7,
+                "hash": "5fc76485240cdec44e6ad18307a625f3"
+            }
+        },
+        "[app:ugc] Test Case 5106768: [MSPH][Feed Management] No Feed List [lp:inner] [ph:NF\\Content Ecosystem\\CreatorCenter] [ow:stcaccuxdri] <chrome>": {
+            "vp_step_0": {
+                "type": "visual",
+                "step": 0,
+                "hash": "b45c859f0a21fb7b89d687380f157407"
+            }
+        },
+        "[app:ugc] Test Case 5217224: [MSPH][Rename  Feed] Rename Feed in Feed List [lp:inner] [ph:NF\\Content Ecosystem\\CreatorCenter] [ow:stcaccuxdri] <chrome>": {
+            "vp_step_0": {
+                "type": "visual",
+                "step": 0,
+                "hash": "5fc76485240cdec44e6ad18307a625f3"
+            },
+            "vp_step_1": {
+                "type": "visual",
+                "step": 1,
+                "hash": "abaa64f0a62661011c49081015c9bdfc"
+            },
+            "vp_step_2": {
+                "type": "visual",
+                "step": 2,
+                "hash": "79860f29ba49154a0ab1179e42fe8d11"
+            },
+            "vp_step_4": {
+                "type": "visual",
+                "step": 4,
+                "hash": "cf3a3192051e68fd263bc1e5b39ecf03"
+            },
+            "vp_step_5": {
+                "type": "visual",
+                "step": 5,
+                "hash": "3893a6e0a0fa2adf9cfef89d44adc12f"
+            },
+            "vp_step_6": {
+                "type": "visual",
+                "step": 6,
+                "hash": "9e8845d01ac8ad06d88ece1e85ce427a"
+            },
+            "vp_step_7": {
+                "type": "visual",
+                "step": 7,
+                "hash": "2f6282b52e683f48507f21f9b978088b"
+            },
+            "vp_step_8": {
+                "type": "visual",
+                "step": 8,
+                "hash": "40371910145a1a8fc6a2fbfa1aa4889a"
+            },
+            "vp_step_11": {
+                "type": "visual",
+                "step": 11,
+                "hash": "6899aee8b424824c022aeee971f71258"
+            }
+        }
+    }
+}
