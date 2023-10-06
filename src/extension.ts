@@ -26,7 +26,7 @@ const getRunSpecTask = (command: string) => {
 
 export function activate(context: ExtensionContext) {
 	const codelensProvider = new CodelensProvider();
-	const notificationPs1 = path.join(context.extensionPath, 'src/utils', 'notification.ps1 -Path');
+	const notificationPs1 = path.join(context.extensionPath, 'assets', 'notification.ps1 -Path');
 	languages.registerCodeLensProvider("json", codelensProvider);
 
 	/* Run spec */

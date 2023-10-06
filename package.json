@@ -3,7 +3,7 @@
   "displayName": "VP test runner",
   "description": "VP test runner",
   "publisher": "lzp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.83.0"
   },
@@ -84,7 +84,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
+    "compile": "tsc -p ./ && md out\\assets && copy /y assets out\\assets\\",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
