@@ -53,14 +53,6 @@ export function activate(context: ExtensionContext) {
 		tasks.executeTask(getRunSpecTask(npmCommand));
 	});
 
-	commands.registerCommand("vp.debug-spec", (args: string[]) => {
-		window.showInformationMessage(`VP debug ${args}`);
-		const workspacePath = getCwd()
-		const filePath = args[0].split("\\visualparity-tests\\")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};npm run test:vp:debug -- -- --local --input '${filePath}'`
-		tasks.executeTask(getRunSpecTask(npmCommand));
-	});
-
 	/* Run spec end */
 
 

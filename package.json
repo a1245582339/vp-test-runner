@@ -1,7 +1,8 @@
 {
-  "name": "lzp.vp-test-runner",
+  "name": "vp-test-runner",
   "displayName": "VP test runner",
   "description": "VP test runner",
+  "publisher": "lzp",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.83.0"
@@ -36,20 +37,12 @@
         "title": "Run Online VP"
       },
       {
-        "command": "vp.debug-spec",
-        "title": "Debug VP"
-      },
-      {
         "command": "vp.run-case-local",
         "title": "Run Local VP"
       },
       {
         "command": "vp.run-case-online",
         "title": "Run Online VP"
-      },
-      {
-        "command": "vp.debug-case",
-        "title": "Debug VP"
       },
       {
         "command": "vp.run-spec-local-folder",
@@ -90,10 +83,10 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run compile",
+    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "pnpm run compile && pnpm run lint",
+    "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },

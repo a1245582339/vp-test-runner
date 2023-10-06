@@ -40,12 +40,6 @@ export class CodelensProvider implements vscode.CodeLensProvider {
                     command: "vp.run-spec-online",
                     arguments: [args]
                 }));
-                this.codeLenses.push(new vscode.CodeLens(range, {
-                    title: "Debug",
-                    tooltip: "Debug all case in this file",
-                    command: "vp.debug-spec",
-                    arguments: [args]
-                }));
             }
         }
 

@@ -5,5 +5,5 @@ export const getCwd = () => {
 }
 
 export const getExtentionPath = () => {
-    return vscode.extensions.getExtension("lzp.vp-test-runner")!.extensionPath
+    return vscode.extensions.getExtension("lzp-vp-test-runner")!.extensionPath
 }
