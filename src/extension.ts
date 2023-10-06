@@ -26,7 +26,7 @@ const getRunSpecTask = (command: string) => {
 
 export function activate(context: ExtensionContext) {
 	const codelensProvider = new CodelensProvider();
-	const notificationPs1 = path.join(context.extensionPath, 'src/utils', 'notification.ps1');
+	const notificationPs1 = path.join(context.extensionPath, 'src/utils', 'notification.ps1 -Path');
 	languages.registerCodeLensProvider("json", codelensProvider);
 
 	/* Run spec */
@@ -34,18 +34,22 @@ export function activate(context: ExtensionContext) {
 		window.showInformationMessage(`VP local start ${args[0]}`);
 		const workspacePath = getCwd()
 		const filePath = args[0].split("\\visualparity-tests\\")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1} ${args[0]}`
 		tasks.executeTask(getRunSpecTask(npmCommand))
 	});
 
 	commands.registerCommand("vp.run-spec-online", async (args: string[]) => {
 		const spalink = await window.showInputBox({
-			prompt: 'Build Number',
+			prompt: 'If you want to use online build, please leave the input box blank and click the Enter button directly.',
+			placeHolder: 'Build Number'
 		})
+		if (spalink === undefined) {
+			return
+		}
 		window.showInformationMessage(`VP online ${spalink} start ${args[0]}`);
 		const workspacePath = getCwd()
 		const filePath = args[0].split("\\visualparity-tests\\")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' --spalink ${spalink};${notificationPs1}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' ${spalink ? `--spalink ${spalink}` : ""};${notificationPs1} ${args[0]}`
 		tasks.executeTask(getRunSpecTask(npmCommand));
 	});
 
@@ -76,15 +80,18 @@ export function activate(context: ExtensionContext) {
 		}
 		
 		const filePath = tempFilePath.split("/visualparity-tests/")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};git update-index --assume-unchanged ./app-types/visualparity-tests/${filePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1} ${args[0]}`
 		tasks.executeTask(getRunSpecTask(npmCommand))
 	});
 
 	commands.registerCommand("vp.run-case-online", async (args: [string, number]) => {
 		const spalink = await window.showInputBox({
-			prompt: 'Build Number',
+			prompt: 'If you want to use online build, please leave the input box blank and click the Enter button directly.',
 			placeHolder: 'Build Number'
 		})
+		if (spalink === undefined) {
+			return
+		}
 		window.showInformationMessage(`VP local start ${args[0]}`);
 		const workspacePath = getCwd()
 		const singleCase = getSingleCaseObj(args[0], args[1])
@@ -99,7 +106,7 @@ export function activate(context: ExtensionContext) {
 		}
 		
 		const filePath = tempFilePath.split("/visualparity-tests/")[1].replace(/\\/g, "/")
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' --spalink ${spalink};${notificationPs1}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' ${spalink ? `--spalink ${spalink}` : ""};${notificationPs1} ${args[0]}`
 		tasks.executeTask(getRunSpecTask(npmCommand));
 	});
 	/* Run case end */
@@ -110,7 +117,7 @@ export function activate(context: ExtensionContext) {
 		window.showInformationMessage(`VP local start ${args.path.slice(1)}`);
 		const workspacePath = getCwd()
 		const filePath = args.path.split("/visualparity-tests/")[1]
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --local --input '${filePath}';${notificationPs1} ${args.path.slice(1)}`
 		tasks.executeTask(getRunSpecTask(npmCommand))
 	});
 
@@ -121,7 +128,7 @@ export function activate(context: ExtensionContext) {
 		window.showInformationMessage(`VP online ${spalink} start ${args.path.slice(1)}`);
 		const workspacePath = getCwd()
 		const filePath = args.path.split("/visualparity-tests/")[1]
-		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' ${spalink ? `--spalink ${spalink}` : ""};${notificationPs1}`
+		const npmCommand = `cd ${workspacePath};npm run test:vp -- -- --input '${filePath}' ${spalink ? `--spalink ${spalink}` : ""};${notificationPs1} ${args.path.slice(1)}`
 		tasks.executeTask(getRunSpecTask(npmCommand));
 	});
 	/* Run folder and file end */

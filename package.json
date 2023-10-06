@@ -1,11 +1,15 @@
 {
   "name": "lzp.vp-test-runner",
   "displayName": "VP test runner",
-  "description": "",
+  "description": "VP test runner",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.83.0"
   },
+  "icon": "image/icon.png",
+  "repository": {
+		"url": "https://github.com/a1245582339/vp-test-runner"
+	},
   "categories": [
     "Other"
   ],
