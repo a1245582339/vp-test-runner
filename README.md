@@ -12,7 +12,7 @@ CodeLens in spec file
 
 There are 2 types of testing methods.
 
-![p1](https://cdn.statically.io/gh/a1245582339/image-hosting@master/20231006133926.6b2aumeeqv00.webp)
+![p1](https://cdn.statically.io/gh/a1245582339/image-hosting@master/微信图片_20231007083526.6lvbz5uknjo0.webp)
 
 * ***Run Local*** is run the vp test with local server env. Equivalent to executing
 
