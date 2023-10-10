@@ -9,7 +9,7 @@ export const getSingleMetaJSON = (metadataPath: string, caseName: string) => {
                             .find((child: any) => child.key.value === "suite")  
                             .value.children
                             .find((child: any) => child.key.value.includes(caseName))
-    metadataObj.suite = { [signleMeta.key.value]: ast2Json(signleMeta)}
+    metadataObj.suite = signleMeta ? { [signleMeta.key.value]: ast2Json(signleMeta)} : {}
     const metaJSON = JSON.stringify(metadataObj)
     return metaJSON
 }
