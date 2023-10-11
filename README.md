@@ -56,3 +56,18 @@ If the vp test is run by a spec file or a singel case, you can open the report i
 If the vp test is run by a folder, you can open this folder in noticaition.
 
 ![p4](https://cdn.statically.io/gh/a1245582339/image-hosting@master/20231006185258.211w3rinpl1c.webp)
+
+If you get the error seems like: `File xxx cannot be loaded because running scripts is disabled on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170`, you need to change the PowerShell Execution Policy by follow steps.
+
+1. Open the Powershell as Administrator
+
+2. Run this Command
+
+```ps1
+Set-ExecutionPolicy RemoteSigned
+```
+
+3. Select "A" and press Enter
+![p4](https://cdn.statically.io/gh/a1245582339/image-hosting@master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20231011161241.7qv7bzoihvc.webp)
+
+4. Rerun the VP test
