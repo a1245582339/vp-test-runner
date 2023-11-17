@@ -1,0 +1,305 @@
+{
+    "$schema": "../../../peregrine.vp.schema.json",
+    "ownership": "stcaccuxdri@microsoft.com",
+    "appType": "ugc",
+    "areaPath": "ContentServices\\News-And-Feeds\\Content Ecosystem\\CreatorCenter",
+    "enforceMock": true,
+    "suiteTitle": "",
+    "timeout": 45000,
+    "startEndpointByEnv": {
+        "prod": "https://www.msn.com/{{market}}/partnerhub?{{spalink}}&item=flights:{{flightId}}&vptest=1",
+        "local": "https://localhost.msn.com:8080/{{market}}/partnerhub?item=flights:{{flightId}}&vptest=1"
+    },
+    "context": {
+        "_device": [
+            "desktopChrome"
+        ],
+        "market": [
+            "en-us"
+        ],
+        "_viewport": [
+            "1092x900"
+        ],
+        "flightId": [
+            ""
+        ],
+        "localStorage": [
+        ]
+    },
+    "interceptions": [
+        {
+            "endpoint": {
+                "regex": "https://.*.clarity.ms/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                },
+                "POST": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://sb.scorecardresearch.com/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://events-sandbox.data.msn.com/OneCollector/.*"
+            },
+            "method": {
+                "POST": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://browser.events.data.microsoft.com/OneCollector/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                },
+                "POST": {
+                    "type": "abort"
+                },
+                "OPTIONS": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://c.msn.com/c.gif.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://.*.msn.com/favicon.ico"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://alcdn.msauth.net/lib/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://mem.gfx.ms/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://js.monitor.azure.com/scripts/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://.*.msn.com/en-us/homepage/secure/silentpassport.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "continue"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://assets.msn.com/bundles/v1/ugc/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "continue"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://dev.assets.msn.com/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "continue"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://assets.msn.com/staticsb/statics/.*/ugc/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "continue"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://assets.msn.com/statics/fonts/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "continue"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://ppe.img.s-msn.com/tenant/amp/entityid/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "abort"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://.*.msn.com/resolver/api/resolve/v3/config/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "continue"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://.*.msn.com/en-us/partnerhub/.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "continue"
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://.*.msn.com/ugc/user/firsttimeexperience.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "response",
+                    "response": {
+                        "data": {
+                            "firstTimeLogin": null,
+                            "firstTimeTippingExperience": null,
+                            "isSignTippingContract": true,
+                            "monetizationProformaFirstTimeExperience": null,
+                            "umsMigrationUserFirstTimeLogin": null,
+                            "hideSuperAdminApplyForm": false
+                        },
+                        "status": 200,
+                        "contentType": "application/json",
+                        "headers": {
+                            "Access-Control-Allow-Origin": "*"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": "https://.*.msn.com/ugc/notification/items.*"
+            },
+            "method": {
+                "GET": {
+                    "type": "response",
+                    "response": {
+                        "contentType": "application/json",
+                        "data": {},
+                        "headers": {
+                            "Access-Control-Allow-Origin": "*"
+                        },
+                        "status": 200
+                    }
+                }
+            }
+        },
+        {
+            "endpoint": {
+                "regex": ".*"
+            },
+            "method": {
+                "OPTIONS": {
+                    "type": "response",
+                    "response": {
+                        "contentType": "application/json",
+                        "headers": {
+                            "Access-Control-Allow-Origin": "*"
+                        },
+                        "status": 200
+                    }
+                }
+            }
+        }
+    ],
+    "tests": [
+        {
+            "testCase": "",
+            "interceptions": [
+                {
+                    "endpoint": {
+                        "regex": "https://.*.msn.com/.*"
+                    },
+                    "method": {
+                        "GET": {
+                            "type": "response",
+                            "response": {
+                                "dataFile": "",
+                                "contentType": "application/json",
+                                "headers": {
+                                    "Access-Control-Allow-Origin": "*"
+                                },
+                                "status": 200
+                            }
+                        }
+                    }
+                }
+            ],
+            "steps": [
+                {
+                    "action": {
+                        "type": ""
+                    },
+                    "comment": "",
+                    "element": "",
+                    "validateBaseline": true
+                }
+            ]
+        }
+    ]
+}

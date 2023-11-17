@@ -3,14 +3,14 @@
   "displayName": "VP test runner",
   "description": "VP test runner",
   "publisher": "lzp",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "engines": {
     "vscode": "^1.83.0"
   },
   "icon": "image/icon.png",
   "repository": {
-		"url": "https://github.com/a1245582339/vp-test-runner"
-	},
+    "url": "https://github.com/a1245582339/vp-test-runner"
+  },
   "categories": [
     "Other"
   ],
@@ -51,6 +51,18 @@
       {
         "command": "vp.run-spec-online-folder",
         "title": "Run Online VP"
+      },
+      {
+        "command": "vp.create-spec-file",
+        "title": "Create a new VP spec file"
+      },
+      {
+        "command": "vp.add-template",
+        "title": "Add file to template list"
+      },
+      {
+        "command": "vp.delete-template",
+        "title": "Delete a VP test template"
       }
     ],
     "menus": {
@@ -64,6 +76,16 @@
           "command": "vp.run-spec-online-folder",
           "group": "02_vp@2",
           "when": "explorerResourceIsFolder || resourceFilename =~ /.*\\.(spec)\\.(json)$/"
+        },
+        {
+          "command": "vp.create-spec-file",
+          "group": "02_vp@3",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "vp.add-template",
+          "group": "02_vp@3",
+          "when": "resourceFilename =~ /.*\\.(spec)\\.(json)$/"
         }
       ]
     },

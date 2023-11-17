@@ -71,3 +71,27 @@ Set-ExecutionPolicy RemoteSigned
 ![p4](https://cdn.statically.io/gh/a1245582339/image-hosting@master/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20231011161241.7qv7bzoihvc.webp)
 
 4. Rerun the VP test
+
+### VP test template
+1. Create a new template
+
+To make it easier to create a new spec file, you can **right click a exist spec file** and add it to spec template.
+![add-temp](https://cdn.statically.io/gh/a1245582339/image-hosting@master/add-temp-left-menu.70d3d5ffib80.webp)
+You can customize a name for it that you find convenient.
+![add-temp](https://cdn.statically.io/gh/a1245582339/image-hosting@master/input-name.74sep2tcads0.webp)
+
+2. Use template
+
+Right click a folder, and click the **Create a new VP spec file**
+
+![use template](https://cdn.statically.io/gh/a1245582339/image-hosting@master/QQ截图20231117172700.7guxh4xxgbs0.webp)
+
+Select a template
+![select template](https://cdn.statically.io/gh/a1245582339/image-hosting@master/select-a-template.in1reuya8nk.webp)
+
+Input a file name and press the Enter
+![new file name](https://cdn.statically.io/gh/a1245582339/image-hosting@master/input-new-file-name.6wsaw4dr3mo0.webp)
+
+3. Delete template
+Considering that deleting a template is a low-frequency operation, I did not set this feature to the right menu. You can press the **F1** and input the **Delete a VP test template**, you can select a template and it will be deleted.
+![delete vp](https://cdn.statically.io/gh/a1245582339/image-hosting@master/delete-vp-temp.5yh9o1uxqb80.webp)

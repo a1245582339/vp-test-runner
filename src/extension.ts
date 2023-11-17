@@ -1,6 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import { ExtensionContext, languages, commands, Disposable, window, Task, TaskScope, ShellExecution, tasks, Uri } from 'vscode';
+import { ExtensionContext, languages, commands, Disposable, workspace, window, Task, TaskScope, ShellExecution, tasks, Uri } from 'vscode';
 import { CodelensProvider } from './utils/codeLensProvider';
 import { getCwd } from './utils/config';
 import { getSingleCaseObj } from './utils/getSingleCaseObj';
@@ -27,6 +27,7 @@ const getRunSpecTask = (command: string) => {
 export function activate(context: ExtensionContext) {
 	const codelensProvider = new CodelensProvider();
 	const notificationPs1 = path.join(context.extensionPath, 'assets', 'notification.ps1 -Path');
+	const templateFileFolderPath = path.join(context.extensionPath, 'assets', 'template');
 	languages.registerCodeLensProvider("json", codelensProvider);
 
 	/* Run spec */
@@ -117,6 +118,9 @@ export function activate(context: ExtensionContext) {
 		const spalink = await window.showInputBox({
 			prompt: 'Build Number',
 		})
+		if (spalink === undefined) {
+			return
+		}
 		window.showInformationMessage(`VP online ${spalink} start ${args.path.slice(1)}`);
 		const workspacePath = getCwd()
 		const filePath = args.path.split("/visualparity-tests/")[1]
@@ -124,6 +128,66 @@ export function activate(context: ExtensionContext) {
 		tasks.executeTask(getRunSpecTask(npmCommand));
 	});
 	/* Run folder and file end */
+
+	/* VP spec template */
+	commands.registerCommand("vp.create-spec-file", async (args: Uri) => {
+		const templates = fs.readdirSync(templateFileFolderPath).map(item => item.replace(".spec.json", ""))
+		const templateName = await window.showQuickPick(templates, {
+			placeHolder: "Select a template to create a spec file"
+		})
+		if (!templateName) {
+			return
+		}
+		const newSpecFileName = await window.showInputBox({
+			prompt: 'New spec file name',
+		})
+		if (newSpecFileName === undefined) {
+			return
+		}
+		const templateFilePath = path.join(templateFileFolderPath, `${templateName}.spec.json`)
+		const folderPath = args.path.slice(1)
+		const newSpecFilePath = path.join(folderPath, `${newSpecFileName}.spec.json`)
+
+		fs.copyFile(templateFilePath, newSpecFilePath, (err) => {
+			console.log(err)
+			})
+		workspace.openTextDocument(newSpecFilePath).then((doc) => {
+			window.showTextDocument(doc);
+		});
+	});
+
+	commands.registerCommand("vp.add-template", async (args: Uri) => {
+		const filePath = args.path.slice(1)
+		const newTemplateName = await window.showInputBox({
+			prompt: 'New template name',
+		})
+		if (newTemplateName === undefined) {
+			return
+		}
+		const templates = fs.readdirSync(templateFileFolderPath).map(item => item.replace(".spec.json", ""))
+		
+		if (templates.includes(newTemplateName)) {
+			window.showErrorMessage(`Template name ${newTemplateName} already exists`)
+			return
+		}
+
+		fs.copyFileSync(filePath, path.join(`${templateFileFolderPath}/${newTemplateName}.spec.json`))
+		window.showInformationMessage(`Add template ${newTemplateName} success`)
+	});
+
+	commands.registerCommand("vp.delete-template", async (args: Uri) => {
+		const templates = fs.readdirSync(templateFileFolderPath).map(item => item.replace(".spec.json", ""))
+		const templateName = await window.showQuickPick(templates, {
+			placeHolder: "Select a template you want to delete"
+		})
+		if (!templateName) {
+			return
+		}
+		
+		fs.unlinkSync(path.join(templateFileFolderPath, `${templateName}.spec.json`))
+		window.showInformationMessage(`The template ${templateName} deleted successfully`)
+	});
+	/* VP spec template end */
 }
 
 // this method is called when your extension is deactivated
