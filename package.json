@@ -3,7 +3,7 @@
   "displayName": "VP test runner",
   "description": "VP test runner",
   "publisher": "lzp",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "engines": {
     "vscode": "^1.83.0"
   },
@@ -63,6 +63,14 @@
       {
         "command": "vp.delete-template",
         "title": "Delete a VP test template"
+      },
+      {
+        "command": "vp.add-localStorage",
+        "title": "Add LocalStorage"
+      },
+      {
+        "command": "vp.add-flight",
+        "title": "Add Flight"
       }
     ],
     "menus": {
@@ -86,6 +94,16 @@
           "command": "vp.add-template",
           "group": "02_vp@3",
           "when": "resourceFilename =~ /.*\\.(spec)\\.(json)$/"
+        },
+        {
+          "command": "vp.add-localStorage",
+          "group": "02_vp@4",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "vp.add-flight",
+          "group": "02_vp@5",
+          "when": "explorerResourceIsFolder"
         }
       ]
     },

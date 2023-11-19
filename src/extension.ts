@@ -7,6 +7,8 @@ import { getSingleCaseObj } from './utils/getSingleCaseObj';
 import fs = require("fs")
 import { getSingleMetaJSON } from './utils/getSingleMetaJSON';
 import path = require('path');
+import { addLocalStorage } from './utils/addLocalStorage';
+import { addFlight } from './utils/addFlight';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -14,7 +16,6 @@ import path = require('path');
 let disposables: Disposable[] = [];
 
 const getRunSpecTask = (command: string) => {
-
 	return new Task(
 		{ type: "start-process", script: "run" },
 		TaskScope.Workspace,
@@ -188,6 +189,42 @@ export function activate(context: ExtensionContext) {
 		window.showInformationMessage(`The template ${templateName} deleted successfully`)
 	});
 	/* VP spec template end */
+
+	/* Add key */
+	commands.registerCommand("vp.add-localStorage", async (args: Uri) => {
+		const key = await window.showInputBox({
+			prompt: 'Key name',
+			placeHolder: 'Key name'
+		})
+		if (key === undefined) {
+			return
+		}
+		const value = await window.showInputBox({
+			prompt: 'Value',
+			placeHolder: 'Value'
+		})
+		if (value === undefined) {
+			return
+		}
+		const folderPath = args.path.slice(1)
+		addLocalStorage(folderPath, key, value)
+		window.showInformationMessage(`LocalStorage {${key}: ${value}} added successfully`)
+	});
+
+	commands.registerCommand("vp.add-flight", async (args: Uri) => {
+		const flightId = await window.showInputBox({
+			prompt: 'Flight Id',
+			placeHolder: "Flight Id"
+		})
+		if (flightId === undefined) {
+			return
+		}
+		const folderPath = args.path.slice(1)
+		addFlight(folderPath, flightId)
+		window.showInformationMessage(`Flight Id ${flightId} added successfully`)
+	});
+
+	/* Add key end */
 }
 
 // this method is called when your extension is deactivated

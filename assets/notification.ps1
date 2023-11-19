@@ -11,7 +11,7 @@ $closeButton = New-BTButton -Content "Close" -Arguments "close"
 $command = Get-Command -Name New-BurntToastNotification -ErrorAction SilentlyContinue
 
 function ShowNotication {
-    if ($isFile && $reportPath) {
+    if ($isFile -and $reportPath) {
         $yesButton = New-BTButton -Content "Yes" -Arguments $reportPath
         New-BurntToastNotification -AppLogo $PSScriptRoot/icon.png -Text "VP completed!","Open the report?" -Button $yesButton, $closeButton
     } else {

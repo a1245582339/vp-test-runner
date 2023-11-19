@@ -4,7 +4,12 @@ An internal tool of running visualparity test
 
 ## Features
 
-### CodeLens
+1. CodeLens of run VP test of spec and single case with int env and online(support buildNumber) env.
+2. Run VP test in right click menu with int env and online(support buildNumber) env.
+3. Add spec file to VP test template and create spec file from added template.
+4. Batch adding flight and localstorage.
+
+### CodeLensun
 
 CodeLens in spec file
 
@@ -95,3 +100,5 @@ Input a file name and press the Enter
 3. Delete template
 Considering that deleting a template is a low-frequency operation, I did not set this feature to the right menu. You can press the **F1** and input the **Delete a VP test template**, you can select a template and it will be deleted.
 ![delete vp](https://cdn.statically.io/gh/a1245582339/image-hosting@master/delete-vp-temp.5yh9o1uxqb80.webp)
+
+### Add Flight and LocalStorage in Folder right-menu
