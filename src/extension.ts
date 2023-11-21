@@ -23,7 +23,7 @@ const getRunSpecTask = (command: string) => {
 		"start-process",
 		new ShellExecution(`Start-Process -FilePath """powershell""" -Verb RunAs -ArgumentList """-NoExit""","""-Command""","""${command}"""`) // 定义任务执行方式
 	);
-}
+};
 
 export function activate(context: ExtensionContext) {
 	const codelensProvider = new CodelensProvider();
