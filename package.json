@@ -3,7 +3,7 @@
   "displayName": "VP test runner",
   "description": "VP test runner",
   "publisher": "lzp",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "engines": {
     "vscode": "^1.83.0"
   },
@@ -71,6 +71,10 @@
       {
         "command": "vp.add-flight",
         "title": "Add Flight"
+      },
+      {
+        "command": "vp.show-attention",
+        "title": "Show Attention"
       }
     ],
     "menus": {

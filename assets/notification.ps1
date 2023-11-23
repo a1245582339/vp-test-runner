@@ -3,26 +3,19 @@ param(
 )
 
 $isFile = Test-Path -Path $Path -PathType Leaf
-$fileName = Split-Path -Path $Path -Leaf
-$specName = $fileName.Replace("spec.json","")
-$reportPath = Get-ChildItem -Path (Split-Path -Path $Path) -Filter $specName*.html | Select-Object -First 1 -ExpandProperty FullName
-
+$reportPath = Get-ChildItem -Path (Split-Path -Path $Path) -Filter *.html | Select-Object -First 1 -ExpandProperty FullName
+$reportFileName = Split-Path -Path $reportPath -Leaf
 
 $closeButton = New-BTButton -Content "Close" -Arguments "close"
 
 $command = Get-Command -Name New-BurntToastNotification -ErrorAction SilentlyContinue
 
 function ShowNotication {
-    if ($isFile) {
-        if ($reportPath) {
-            $yesButton = New-BTButton -Content "Yes" -Arguments $reportPath
-            New-BurntToastNotification -AppLogo $PSScriptRoot/icon.png -Text "VP completed!","Open the report?" -Button $yesButton, $closeButton
-        } else {
-            New-BurntToastNotification -AppLogo $PSScriptRoot/icon.png -Text "VP failed" -Button $closeButton
-        }
-        
+    if ($isFile -and $reportPath) {
+        $yesButton = New-BTButton -Content "Open" -Arguments $reportPath
+        New-BurntToastNotification -AppLogo $PSScriptRoot/icon.png -Text "VP completed!","$reportFileName`n Open the report?" -Button $yesButton, $closeButton
     } else {
-        $yesButton = New-BTButton -Content "Yes" -Arguments $Path
+        $yesButton = New-BTButton -Content "Open" -Arguments $Path
         New-BurntToastNotification -AppLogo $PSScriptRoot/icon.png -Text "VP completed!","Open the reports folder?" -Button $yesButton, $closeButton
     }
 }

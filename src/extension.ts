@@ -225,6 +225,11 @@ export function activate(context: ExtensionContext) {
 	});
 
 	/* Add key end */
+
+	/* Show attention */
+	commands.registerCommand("vp.show-attention", async (arg: string) => {
+		window.showWarningMessage(arg)
+	});
 }
 
 // this method is called when your extension is deactivated

@@ -53,6 +53,12 @@ export class CodelensProvider implements vscode.CodeLensProvider {
                 const line = range.start.line + 1
                 const args = [filePath, line]
                 this.codeLenses.push(new vscode.CodeLens(range, {
+                    title: "Attention!",
+                    tooltip: "Attention!",
+                    command: "vp.show-attention",
+                    arguments: ["These two commands are only applicable to the debugging VP test phase. If you have many test cases in a single spec file, which results in a long debugging time for a single case, these two commands can reduce your debugging time, but please do not use its baseline."]
+                }));
+                this.codeLenses.push(new vscode.CodeLens(range, {
                     title: "Run Local",
                     tooltip: "Run this case",
                     command: "vp.run-case-local",
@@ -64,6 +70,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
                     command: "vp.run-case-online",
                     arguments: [args]
                 }));
+                
             }
         }
         return this.codeLenses;

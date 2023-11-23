@@ -48,6 +48,8 @@ _temp_**.spec.json
 _temp_**.metadata.json
 ```
 
+**These two commands are only applicable to the debugging VP test phase. If you have many test cases in a single spec file, which results in a long debugging time for a single case, these two commands can reduce your debugging time, but please do not use its baseline.**
+
 ### Right-click menu
 
 Right-click menu of folder and *.spec.json file.
